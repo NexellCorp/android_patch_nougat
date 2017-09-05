@@ -1,0 +1,18 @@
+diff --git init/service.cpp init/service.cpp
+index 9ba0272..36112b3 100644
+--- init/service.cpp
++++ init/service.cpp
+@@ -78,10 +78,13 @@ static std::string ComputeContextFromExecutable(std::string& service_name,
+         computed_context = new_con;
+         free(new_con);
+     }
++	// psw0523: workaround for service not started
++#if 0
+     if (rc == 0 && computed_context == mycon.get()) {
+         LOG(ERROR) << "service " << service_name << " does not have a SELinux domain defined";
+         return "";
+     }
++#endif
+     if (rc < 0) {
+         LOG(ERROR) << "could not get context while starting '" << service_name << "'";
+         return "";
